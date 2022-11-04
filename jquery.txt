@@ -1,0 +1,24 @@
+$('#btntest1').on('click', function(){
+	// 1. Insert a new image between the second and the third one.
+  // The new image is: https://www.arpm.co/job/test/img/6.png
+  $('<img src="https://www.arpm.co/job/test/img/6.png" />').insertAfter($('img:first-child').next());
+  
+});
+$('#btntest2').on('click', function(){
+	// 2. Position the yellow circle of the second line exactly below the purple circle of the first line 
+  // in order that the top border of the yellow circle is tangent the the bottom border of the purple one
+  const wd = $('img').width();
+  $('#test2 img').css({'margin-left': (wd * 2) + 'px'})
+});
+$('#btntest3').on('click', function(){
+	// 3. Make a post ajax call to this url: /echo/html/
+  //		- send 1 param with key 'html' and as value the value of the source attribute of the yellow image
+  //		- print the result inside the DIV with id "result3"
+  const ylw = $('#test2 img').attr('src');
+  $.post('/echo/html/', {
+  	'html': ylw
+  }, function(data) {
+  	$('#result3').append("<img src='"+ data +"'/>");
+  });
+
+});
